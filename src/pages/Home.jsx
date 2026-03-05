@@ -1,11 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HeroSection from "../components/HeroSection";
 import Cards from "../components/Cards";
 import { Link } from "react-router-dom";
-import { DataContext } from "../context/DataContext";
+import { useSelector, useDispatch } from "react-redux";
+import { featchProduct } from "../feature/product/productSlice";
 
 const Home = () => {
-  const { apiData } = useContext(DataContext);
+  const { products, loading, error } = useSelector((state) => state.products);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(featchProduct());
+  }, [dispatch]);
 
   return (
     <>
@@ -14,14 +21,13 @@ const Home = () => {
         Our Highest Rated Products
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4">
-        {apiData &&
-          apiData
+        {products &&
+          products
             .filter((item) => item.rating > 4.1)
             .slice(0, 4)
             .map((item) => (
-              <Link to="product">
+              <Link to="product" key={item.id}>
                 <Cards
-                  key={item.id}
                   id={item.id}
                   title={item.title}
                   image={item.thumbnail}
@@ -36,14 +42,13 @@ const Home = () => {
         Our Fragrances Products
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4">
-        {apiData &&
-          apiData
+        {products &&
+          products
             .filter((item) => item.category === "fragrances")
             .slice(0, 4)
             .map((item) => (
-              <Link to="product">
+              <Link to="product" key={item.id}>
                 <Cards
-                  key={item.id}
                   id={item.id}
                   title={item.title}
                   image={item.thumbnail}

@@ -2,25 +2,27 @@ import React, { useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import ProductDetailsView from "../components/ProductDetailsView";
 import Cards from "../components/Cards";
-import { DataContext } from "../context/DataContext";
+import { useSelector, useDispatch } from "react-redux";
+import { featchProduct } from "../feature/product/productSlice";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { apiData } = useContext(DataContext);
+  const dispatch = useDispatch();
+  const { products, loading, error } = useSelector((state) => state.products);
 
   // If data not loaded yet
-  if (!apiData || apiData.length === 0) {
+  if (!products || products.length === 0) {
     return <h2 className="text-center mt-10">Loading...</h2>;
   }
 
-  const singleProduct = apiData.find((item) => item.id === Number(id));
+  const singleProduct = products.find((item) => item.id === Number(id));
 
   // If product not found
   if (!singleProduct) {
     return <h2 className="text-center mt-10">Product Not Found</h2>;
   }
 
-  const relatedProducts = apiData.filter(
+  const relatedProducts = products.filter(
     (item) =>
       item.category === singleProduct.category && item.id !== singleProduct.id,
   );
