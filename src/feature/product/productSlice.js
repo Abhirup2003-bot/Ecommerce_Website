@@ -1,36 +1,45 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const featchProduct = createAsyncThunk(
-  "products/fetchProducts",
-  async () => {
-    const response = await fetch("https://dummyjson.com/products");
-    const data = await response.json();
+export const fetchProduct = createAsyncThunk(
+  "products/fetchProduct",
+  async (page) => {
+    const limit = 10;
+    const skip = (page - 1) * limit;
+
+    const res = await fetch(
+      `https://dummyjson.com/products?limit=${limit}&skip=${skip}`,
+    );
+
+    const data = await res.json();
     return data.products;
   },
 );
+
 const productSlice = createSlice({
-  name: "product",
+  name: "products",
   initialState: {
     products: [],
+    page: 1,
     loading: false,
-    error: null,
   },
-  reducers: {},
+
+  reducers: {
+    nextPage: (state) => {
+      state.page += 1;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
-      .addCase(featchProduct.pending, (state) => {
+      .addCase(fetchProduct.pending, (state) => {
         state.loading = true;
       })
-      .addCase(featchProduct.fulfilled, (state, action) => {
+      .addCase(fetchProduct.fulfilled, (state, action) => {
         state.loading = false;
-        state.products = action.payload;
-      })
-      .addCase(featchProduct.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
+        state.products = [...state.products, ...action.payload];
       });
   },
 });
 
+export const { nextPage } = productSlice.actions;
 export default productSlice.reducer;

@@ -1,21 +1,36 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Cards from "../components/Cards";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { featchProduct } from "../feature/product/productSlice";
-// import { DataContext } from "../context/DataContext";
+import { fetchProduct, nextPage } from "../feature/product/productSlice";
 
 const Product = () => {
-  // const { apiData } = useContext(DataContext);
   const dispatch = useDispatch();
-  const { products, loading, error } = useSelector((state) => state.products);
+
+  const { products, loading, error, page } = useSelector(
+    (state) => state.products,
+  );
 
   useEffect(() => {
-    dispatch(featchProduct());
-  }, [dispatch]);
+    dispatch(fetchProduct(page));
+  }, [page, dispatch]);
 
-  if (loading) return <h1>Loading...</h1>;
-  if (error) return <h1>{error}</h1>;
+  const handleScroll = () => {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 50
+    ) {
+      dispatch(nextPage());
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  if (loading) return <h1 className="text-center text-xl">Loading...</h1>;
+  if (error) return <h1 className="text-center text-red-500">{error}</h1>;
 
   return (
     <>
@@ -26,7 +41,6 @@ const Product = () => {
           products.map((item) => (
             <Link to={`/productdetails/${item.id}`} key={item.id}>
               <Cards
-                key={item.id}
                 id={item.id}
                 title={item.title}
                 image={item.thumbnail}

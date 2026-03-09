@@ -1,23 +1,23 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useParams, Link } from "react-router-dom";
 import ProductDetailsView from "../components/ProductDetailsView";
 import Cards from "../components/Cards";
-import { useSelector, useDispatch } from "react-redux";
-import { featchProduct } from "../feature/product/productSlice";
+import { useSelector } from "react-redux";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
+
   const { products, loading, error } = useSelector((state) => state.products);
 
-  // If data not loaded yet
+  if (loading) return <h2 className="text-center mt-10">Loading...</h2>;
+  if (error) return <h2 className="text-center mt-10">{error}</h2>;
+
   if (!products || products.length === 0) {
     return <h2 className="text-center mt-10">Loading...</h2>;
   }
 
   const singleProduct = products.find((item) => item.id === Number(id));
 
-  // If product not found
   if (!singleProduct) {
     return <h2 className="text-center mt-10">Product Not Found</h2>;
   }
