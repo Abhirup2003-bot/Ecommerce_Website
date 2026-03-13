@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const slides = [
-  "https://images.unsplash.com/photo-1607082349566-187342175e2f",
-  "https://images.unsplash.com/photo-1607083206869-4c7672e72a8a",
-  "https://images.unsplash.com/photo-1580910051074-3eb694886505",
-];
-
 const HeroSection = () => {
+  const { products, loading } = useSelector((state) => state.products);
+
+  const slides = products.slice(0, 10);
   const [current, setCurrent] = useState(0);
   const length = slides.length;
 
-  // Auto Slide
   useEffect(() => {
+    if (length === 0) return;
+
     const slider = setInterval(() => {
       setCurrent((prev) => (prev === length - 1 ? 0 : prev + 1));
-    }, 3000);
+    }, 3500);
 
     return () => clearInterval(slider);
   }, [length]);
@@ -28,104 +27,100 @@ const HeroSection = () => {
     setCurrent((prev) => (prev === 0 ? length - 1 : prev - 1));
   };
 
+  if (loading || slides.length === 0) {
+    return (
+      <div className="h-[250px] sm:h-[350px] flex items-center justify-center text-lg">
+        Loading Banner...
+      </div>
+    );
+  }
+
   return (
     <section className="w-full">
-      <div className="max-w-screen-2xl mx-auto relative">
-        {/* Slider */}
+      <div className="max-w-screen-2xl mx-auto px-3 sm:px-6">
         <div
-          className="relative w-full 
-                        h-[250px] 
-                        sm:h-[350px] 
-                        md:h-[450px] 
-                        lg:h-[550px] 
-                        xl:h-[650px] 
-                        overflow-hidden"
+          className="relative bg-gray-100  overflow-hidden
+                        h-[320px] 
+                        sm:h-[360px] 
+                        md:h-[420px] 
+                        lg:h-[650px]"
         >
-          {slides.map((slide, index) => (
-            <div
-              key={index}
-              className={`absolute w-full h-full transition-opacity duration-700 ease-in-out ${
-                index === current ? "opacity-100 z-10" : "opacity-0 z-0"
+          {slides.map((product, index) => (
+            <Link
+              to={`/productdetails/${product.id}`}
+              key={product.id}
+              className={`absolute inset-0 transition-opacity duration-700 ${
+                index === current ? "opacity-100 z-10" : "opacity-0"
               }`}
             >
-              <img
-                src={slide}
-                alt="banner"
-                className="w-full h-full object-cover"
-              />
+              <div
+                className="flex flex-col md:flex-row items-center justify-between
+                              h-full gap-4 md:gap-8 
+                              px-4 sm:px-8 py-6"
+              >
+                {/* TEXT SECTION */}
+                <div className="text-center md:text-left max-w-md">
+                  <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 line-clamp-2">
+                    {product.title}
+                  </h2>
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-            </div>
+                  <p className="text-sm sm:text-base mt-2 text-gray-600">
+                    Category: {product.category}
+                  </p>
+
+                  <p className="text-base sm:text-lg md:text-xl mt-2 font-semibold text-green-600">
+                    ${product.price}
+                  </p>
+
+                  <button className="mt-4 px-4 sm:px-6 py-2 text-sm sm:text-base bg-yellow-400 hover:bg-yellow-500 text-black font-semibold rounded-lg">
+                    Shop Now
+                  </button>
+                </div>
+
+                {/* IMAGE SECTION */}
+                <div className="flex justify-center items-center w-full md:w-auto">
+                  <img
+                    src={product.thumbnail}
+                    alt={product.title}
+                    className="max-h-[140px] sm:max-h-[200px] md:max-h-[260px] lg:max-h-[320px] object-contain"
+                  />
+                </div>
+              </div>
+            </Link>
           ))}
 
-          {/* Left Arrow */}
+          {/* LEFT ARROW */}
           <button
             onClick={prevSlide}
-            className="absolute top-1/2 left-3 md:left-5 -translate-y-1/2 
-                       bg-white/60 hover:bg-white 
-                       p-2 md:p-3 
-                       rounded-full shadow-md 
-                       text-sm md:text-lg"
+            className="absolute top-1/2 left-2 sm:left-4 -translate-y-1/2 
+                       bg-white/80 hover:bg-white 
+                       p-1 sm:p-2 rounded-full shadow text-sm sm:text-lg"
           >
             ❮
           </button>
 
-          {/* Right Arrow */}
+          {/* RIGHT ARROW */}
           <button
             onClick={nextSlide}
-            className="absolute top-1/2 right-3 md:right-5 -translate-y-1/2 
-                       bg-white/60 hover:bg-white 
-                       p-2 md:p-3 
-                       rounded-full shadow-md 
-                       text-sm md:text-lg"
+            className="absolute top-1/2 right-2 sm:right-4 -translate-y-1/2 
+                       bg-white/80 hover:bg-white 
+                       p-1 sm:p-2 rounded-full shadow text-sm sm:text-lg"
           >
             ❯
           </button>
 
-          {/* Dots */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3">
+          {/* DOTS */}
+          <div className="absolute bottom-2 sm:bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
             {slides.map((_, index) => (
               <div
                 key={index}
                 onClick={() => setCurrent(index)}
-                className={`w-2 h-2 md:w-3 md:h-3 rounded-full cursor-pointer transition-all ${
-                  current === index ? "bg-white scale-125" : "bg-white/50"
+                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full cursor-pointer transition-all ${
+                  current === index ? "bg-black scale-110" : "bg-gray-400"
                 }`}
               />
             ))}
           </div>
-        </div>
-
-        {/* CTA Buttons */}
-        <div
-          className="flex flex-col sm:flex-row justify-center items-center 
-                        gap-4 
-                        py-6 md:py-10 px-4"
-        >
-          <Link
-            to="/product"
-            className="w-full sm:w-auto text-center 
-                       px-6 py-3 
-                       bg-green-600 hover:bg-green-700 
-                       text-white font-semibold 
-                       rounded-lg shadow-md 
-                       transition duration-300"
-          >
-            Get Started
-          </Link>
-
-          <Link
-            to="/about"
-            className="w-full sm:w-auto text-center 
-                       px-6 py-3 
-                       bg-amber-400 hover:bg-amber-500 
-                       text-gray-900 font-semibold 
-                       rounded-lg shadow-md 
-                       transition duration-300"
-          >
-            Learn More
-          </Link>
         </div>
       </div>
     </section>

@@ -40,7 +40,7 @@ const Home = () => {
         {products &&
           products
             .filter((item) => item.rating > 4)
-            .slice(0, 4)
+            .slice(0, 8)
             .map((item) => (
               <Link to="product" key={item.id}>
                 <Cards
