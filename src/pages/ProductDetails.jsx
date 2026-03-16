@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import ProductDetailsView from "../components/ProductDetailsView";
 import Cards from "../components/Cards";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProduct } from "../feature/product/productSlice"; // ✅ correct import
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   const { products, loading, error } = useSelector((state) => state.products);
+
+  // ✅ Fetch only when products are empty
+  useEffect(() => {
+    if (!products || products.length === 0) {
+      dispatch(fetchProduct());
+    }
+  }, [dispatch, products]);
 
   if (loading) return <h2 className="text-center mt-10">Loading...</h2>;
   if (error) return <h2 className="text-center mt-10">{error}</h2>;
@@ -37,12 +46,14 @@ const ProductDetails = () => {
         rating={singleProduct.rating}
         category={singleProduct.category}
         description={singleProduct.description}
+        images={singleProduct.images}
+        returnPolicy={singleProduct.returnPolicy}
       />
 
       <h1 className="my-10 text-center text-3xl font-bold">Related Products</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4">
-        {relatedProducts.slice(0, 4).map((item) => (
+        {relatedProducts.slice(0, 8).map((item) => (
           <Link to={`/productdetails/${item.id}`} key={item.id}>
             <Cards
               id={item.id}

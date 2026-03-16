@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   const linkClass =
     "block px-4 py-2 rounded-md text-gray-700 hover:bg-blue-500 hover:text-white transition duration-300";
@@ -50,6 +53,17 @@ const Header = () => {
       >
         Product
       </NavLink>
+
+      {/* Cart Link */}
+      <NavLink
+        to="/cart"
+        onClick={() => setIsOpen(false)}
+        className={({ isActive }) =>
+          isActive ? `${linkClass} ${activeClass}` : linkClass
+        }
+      >
+        🛒 Cart ({cartItems.length})
+      </NavLink>
     </>
   );
 
@@ -92,7 +106,6 @@ const Header = () => {
         </div>
       </nav>
 
-      {/* Spacer */}
       <div className="h-16"></div>
     </>
   );

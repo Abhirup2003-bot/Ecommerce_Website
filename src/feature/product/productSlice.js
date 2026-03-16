@@ -2,7 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchProduct = createAsyncThunk(
   "products/fetchProduct",
-  async (page) => {
+  async (page = 1) => {
+    // ✅ default page
     const limit = 10;
     const skip = (page - 1) * limit;
 
@@ -47,9 +48,8 @@ const productSlice = createSlice({
       .addCase(fetchProduct.fulfilled, (state, action) => {
         state.loading = false;
 
-        const newProducts = action.payload.products;
+        const newProducts = action.payload?.products || []; // ✅ safe
 
-        // Remove duplicates
         const existingIds = new Set(state.products.map((p) => p.id));
 
         const filteredProducts = newProducts.filter(

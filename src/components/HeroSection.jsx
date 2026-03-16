@@ -40,9 +40,9 @@ const HeroSection = () => {
       <div className="max-w-screen-2xl mx-auto px-3 sm:px-6">
         <div
           className="relative bg-gray-100  overflow-hidden
-                        h-[320px] 
-                        sm:h-[360px] 
-                        md:h-[420px] 
+                        h-[360px] 
+                        sm:h-[390px] 
+                        md:h-[520px] 
                         lg:h-[650px]"
         >
           {slides.map((product, index) => (
@@ -59,7 +59,7 @@ const HeroSection = () => {
                               px-4 sm:px-8 py-6"
               >
                 {/* TEXT SECTION */}
-                <div className="text-center md:text-left max-w-md">
+                <div className="text-center m-4 md:text-left max-w-md">
                   <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 line-clamp-2">
                     {product.title}
                   </h2>
