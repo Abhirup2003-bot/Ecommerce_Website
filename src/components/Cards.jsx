@@ -52,9 +52,9 @@ const Cards = ({
   const emptyStars = totalStars - filledStars;
 
   return (
-    <div className="bg-white rounded-2xl shadow-md mx-4 hover:shadow-xl transition duration-300 p-4 group cursor-pointer">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md dark:shadow-lg mx-4 hover:shadow-xl dark:hover:shadow-2xl transition duration-300 p-4 group cursor-pointer">
       {/* Image */}
-      <div className="relative overflow-hidden rounded-xl bg-gray-100">
+      <div className="relative overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-700">
         <img
           src={image}
           alt={title}
@@ -69,7 +69,7 @@ const Cards = ({
 
       {/* Info */}
       <div className="mt-3 space-y-2">
-        <h2 className="text-sm font-medium text-gray-800 line-clamp-2">
+        <h2 className="text-sm font-medium text-gray-800 dark:text-gray-200 line-clamp-2">
           {title}
         </h2>
 
@@ -82,18 +82,22 @@ const Cards = ({
           ))}
 
           {[...Array(emptyStars)].map((_, index) => (
-            <span key={index} className="text-gray-300">
+            <span key={index} className="text-gray-300 dark:text-gray-500">
               ★
             </span>
           ))}
 
-          <span className="text-gray-500 text-xs ml-1">({rating})</span>
+          <span className="text-gray-500 dark:text-gray-400 text-xs ml-1">
+            ({rating})
+          </span>
         </div>
 
         {/* Price */}
         <div className="flex items-center gap-2">
-          <span className="text-lg font-semibold text-gray-900">₹{price}</span>
-          <span className="text-sm text-gray-500 line-through">
+          <span className="text-lg font-semibold text-gray-900 dark:text-white">
+            ₹{price}
+          </span>
+          <span className="text-sm text-gray-500 dark:text-gray-400 line-through">
             ₹{price + 300}
           </span>
         </div>
@@ -115,16 +119,16 @@ const Cards = ({
               <div className="flex items-center gap-3">
                 <button
                   onClick={decrease}
-                  className="px-3 py-1 bg-gray-200 rounded"
+                  className="px-3 py-1 bg-gray-200 dark:bg-gray-700 dark:text-white rounded"
                 >
                   -
                 </button>
 
-                <span>{quantity}</span>
+                <span className="dark:text-white">{quantity}</span>
 
                 <button
                   onClick={increase}
-                  className="px-3 py-1 bg-gray-200 rounded"
+                  className="px-3 py-1 bg-gray-200 dark:bg-gray-700 dark:text-white rounded"
                 >
                   +
                 </button>

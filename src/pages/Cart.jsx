@@ -8,12 +8,12 @@ const Cart = () => {
   const totalPrice = useSelector(selectCartTotal);
 
   return (
-    <>
-      <div className="text-2xl text-center my-6 font-bold">My Cart</div>
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen text-gray-900 dark:text-gray-100">
+      <div className="text-2xl text-center py-6 font-bold">My Cart</div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4 px-4">
         {cartItems.length === 0 ? (
-          <h2 className="text-center col-span-full text-gray-500">
+          <h2 className="text-center col-span-full text-gray-500 dark:text-gray-400">
             Your cart is empty
           </h2>
         ) : (
@@ -36,15 +36,17 @@ const Cart = () => {
       {/* TOTAL PRICE */}
 
       {cartItems.length > 0 && (
-        <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow rounded-xl">
-          <h2 className="text-xl font-semibold mb-4">Cart Summary</h2>
+        <div className="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 shadow rounded-xl">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+            Cart Summary
+          </h2>
 
-          <div className="flex justify-between mb-2">
+          <div className="flex justify-between mb-2 text-gray-700 dark:text-gray-300">
             <span>Total Items</span>
             <span>{cartItems.length}</span>
           </div>
 
-          <div className="flex justify-between text-lg font-bold">
+          <div className="flex justify-between text-lg font-bold text-gray-900 dark:text-white">
             <span>Total Price</span>
             <span>₹{totalPrice}</span>
           </div>
@@ -54,7 +56,7 @@ const Cart = () => {
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

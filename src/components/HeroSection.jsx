@@ -29,7 +29,7 @@ const HeroSection = () => {
 
   if (loading || slides.length === 0) {
     return (
-      <div className="h-[250px] sm:h-[350px] flex items-center justify-center text-lg">
+      <div className="h-[250px] sm:h-[350px] flex items-center justify-center text-lg text-gray-800 dark:text-gray-200">
         Loading Banner...
       </div>
     );
@@ -39,11 +39,12 @@ const HeroSection = () => {
     <section className="w-full">
       <div className="max-w-screen-2xl mx-auto px-3 sm:px-6">
         <div
-          className="relative bg-gray-100  overflow-hidden
-                        h-[360px] 
-                        sm:h-[390px] 
-                        md:h-[520px] 
-                        lg:h-[650px]"
+          className="relative bg-gray-100 dark:bg-gray-900 overflow-hidden
+             shadow-lg dark:shadow-2xl rounded-xl
+             h-[360px] 
+             sm:h-[390px] 
+             md:h-[520px] 
+             lg:h-[650px]"
         >
           {slides.map((product, index) => (
             <Link
@@ -55,16 +56,16 @@ const HeroSection = () => {
             >
               <div
                 className="flex flex-col md:flex-row items-center justify-between
-                              h-full gap-4 md:gap-8 
-                              px-4 sm:px-8 py-6"
+                           h-full gap-4 md:gap-8 
+                           px-4 sm:px-8 py-6"
               >
                 {/* TEXT SECTION */}
                 <div className="text-center m-4 md:text-left max-w-md">
-                  <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 line-clamp-2">
+                  <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 dark:text-white line-clamp-2">
                     {product.title}
                   </h2>
 
-                  <p className="text-sm sm:text-base mt-2 text-gray-600">
+                  <p className="text-sm sm:text-base mt-2 text-gray-600 dark:text-gray-400">
                     Category: {product.category}
                   </p>
 
@@ -93,7 +94,8 @@ const HeroSection = () => {
           <button
             onClick={prevSlide}
             className="absolute top-1/2 left-2 sm:left-4 -translate-y-1/2 
-                       bg-white/80 hover:bg-white 
+                       bg-white/80 dark:bg-gray-800 dark:text-white 
+                       hover:bg-white dark:hover:bg-gray-700
                        p-1 sm:p-2 rounded-full shadow text-sm sm:text-lg"
           >
             ❮
@@ -103,7 +105,8 @@ const HeroSection = () => {
           <button
             onClick={nextSlide}
             className="absolute top-1/2 right-2 sm:right-4 -translate-y-1/2 
-                       bg-white/80 hover:bg-white 
+                       bg-white/80 dark:bg-gray-800 dark:text-white 
+                       hover:bg-white dark:hover:bg-gray-700
                        p-1 sm:p-2 rounded-full shadow text-sm sm:text-lg"
           >
             ❯
@@ -116,7 +119,9 @@ const HeroSection = () => {
                 key={index}
                 onClick={() => setCurrent(index)}
                 className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full cursor-pointer transition-all ${
-                  current === index ? "bg-black scale-110" : "bg-gray-400"
+                  current === index
+                    ? "bg-black dark:bg-white scale-110"
+                    : "bg-gray-400"
                 }`}
               />
             ))}

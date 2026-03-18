@@ -2,7 +2,7 @@ import React from "react";
 
 const Contact = () => {
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-gray-100 text-gray-800">
+    <div className="bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 text-gray-800 dark:text-gray-200">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-700 text-white py-20 text-center px-6 overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
@@ -17,51 +17,53 @@ const Contact = () => {
       {/* Main Section */}
       <section className="max-w-6xl mx-auto py-20 px-6 grid md:grid-cols-2 gap-12">
         {/* Contact Form */}
-        <div className="backdrop-blur-lg bg-white/70 p-10 rounded-3xl shadow-xl border border-gray-200">
-          <h2 className="text-2xl font-bold mb-8 text-gray-800">
+        <div className="backdrop-blur-lg bg-white/70 dark:bg-gray-800/60 p-10 rounded-3xl shadow-xl border border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-bold mb-8 text-gray-800 dark:text-white">
             Send Us a Message
           </h2>
 
           <form className="space-y-6">
             <div>
-              <label className="block mb-2 text-sm font-medium">
+              <label className="block mb-2 text-sm font-medium dark:text-gray-300">
                 Full Name
               </label>
               <input
                 type="text"
                 placeholder="Enter your name"
-                className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
+                className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-800 dark:text-white rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
               />
             </div>
 
             <div>
-              <label className="block mb-2 text-sm font-medium">
+              <label className="block mb-2 text-sm font-medium dark:text-gray-300">
                 Email Address
               </label>
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
+                className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-800 dark:text-white rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
               />
             </div>
 
             <div>
-              <label className="block mb-2 text-sm font-medium">
+              <label className="block mb-2 text-sm font-medium dark:text-gray-300">
                 Order ID (Optional)
               </label>
               <input
                 type="text"
                 placeholder="Order ID"
-                className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
+                className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-800 dark:text-white rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
               />
             </div>
 
             <div>
-              <label className="block mb-2 text-sm font-medium">Message</label>
+              <label className="block mb-2 text-sm font-medium dark:text-gray-300">
+                Message
+              </label>
               <textarea
                 rows="4"
                 placeholder="Type your message..."
-                className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
+                className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-800 dark:text-white rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
               ></textarea>
             </div>
 
@@ -76,63 +78,67 @@ const Contact = () => {
 
         {/* Support Info Cards */}
         <div className="space-y-8">
-          <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 border">
+          <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 border border-gray-200 dark:border-gray-700">
             <h3 className="text-lg font-semibold mb-3">
               📞 24/7 Customer Support
             </h3>
-            <p className="text-gray-600">+91 98765 43210</p>
-            <p className="text-gray-500 text-sm mt-1">
+            <p className="text-gray-600 dark:text-gray-300">+91 98765 43210</p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
               Available 24 hours, 7 days a week
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 border">
+          <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 border border-gray-200 dark:border-gray-700">
             <h3 className="text-lg font-semibold mb-3">📧 Email Assistance</h3>
-            <p className="text-gray-600">support@yourstore.com</p>
-            <p className="text-gray-500 text-sm mt-1">
+            <p className="text-gray-600 dark:text-gray-300">
+              support@yourstore.com
+            </p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
               We reply within 12–24 hours
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 border">
+          <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 border border-gray-200 dark:border-gray-700">
             <h3 className="text-lg font-semibold mb-3">🏢 Our Office</h3>
-            <p className="text-gray-600">123 Business Street, Mumbai, India</p>
+            <p className="text-gray-600 dark:text-gray-300">
+              123 Business Street, Mumbai, India
+            </p>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="bg-white py-20 px-6">
+      <section className="bg-white dark:bg-gray-900 py-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
             Frequently Asked Questions
           </h2>
 
           <div className="space-y-6">
-            <div className="p-6 border rounded-2xl hover:bg-gray-50 transition">
+            <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-800 transition">
               <h3 className="font-semibold text-lg">
                 How can I track my order?
               </h3>
-              <p className="text-gray-600 mt-2">
+              <p className="text-gray-600 dark:text-gray-400 mt-2">
                 You can track your order from your account dashboard under "My
                 Orders".
               </p>
             </div>
 
-            <div className="p-6 border rounded-2xl hover:bg-gray-50 transition">
+            <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-800 transition">
               <h3 className="font-semibold text-lg">
                 What is your return policy?
               </h3>
-              <p className="text-gray-600 mt-2">
+              <p className="text-gray-600 dark:text-gray-400 mt-2">
                 We offer a 7-day easy return on eligible products.
               </p>
             </div>
 
-            <div className="p-6 border rounded-2xl hover:bg-gray-50 transition">
+            <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-800 transition">
               <h3 className="font-semibold text-lg">
                 How long does shipping take?
               </h3>
-              <p className="text-gray-600 mt-2">
+              <p className="text-gray-600 dark:text-gray-400 mt-2">
                 Standard delivery usually takes 3–5 business days.
               </p>
             </div>

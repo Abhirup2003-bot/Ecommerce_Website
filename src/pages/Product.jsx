@@ -37,9 +37,11 @@ const Product = () => {
   );
 
   return (
-    <>
-      <div className="text-2xl text-center my-6 font-bold">Our Products</div>
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen text-gray-900 dark:text-gray-100">
+      {/* TITLE */}
+      <div className="text-2xl text-center py-6 font-bold">Our Products</div>
 
+      {/* PRODUCTS GRID */}
       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4 px-4">
         {products.map((item, index) => {
           if (products.length === index + 1) {
@@ -76,14 +78,20 @@ const Product = () => {
         })}
       </div>
 
+      {/* LOADING */}
       {loading && (
-        <h1 className="text-center py-6 text-lg">Loading more products...</h1>
+        <h1 className="text-center py-6 text-lg text-gray-700 dark:text-gray-300">
+          Loading more products...
+        </h1>
       )}
 
+      {/* NO MORE */}
       {!hasMore && (
-        <h1 className="text-center py-6 text-gray-500">No more products</h1>
+        <h1 className="text-center py-6 text-gray-500 dark:text-gray-400">
+          No more products
+        </h1>
       )}
-    </>
+    </div>
   );
 };
 

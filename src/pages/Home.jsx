@@ -29,14 +29,15 @@ const Home = () => {
   }, [loading]);
 
   return (
-    <>
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen text-gray-900 dark:text-gray-100">
       <HeroSection />
 
+      {/* TOP RATED */}
       <div className="text-2xl text-center my-6 font-bold">
         Our Highest Rated Products
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4 px-4">
         {products &&
           products
             .filter((item) => item.rating > 4)
@@ -55,9 +56,10 @@ const Home = () => {
             ))}
       </div>
 
+      {/* SMARTPHONES */}
       <div className="text-2xl text-center my-6 font-bold">Our Smartphones</div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4 px-4">
         {products &&
           products
             .filter((item) => item.category === "smartphones")
@@ -75,7 +77,7 @@ const Home = () => {
               </Link>
             ))}
       </div>
-    </>
+    </div>
   );
 };
 
