@@ -48,7 +48,7 @@ const Cart = () => {
 
           <div className="flex justify-between text-lg font-bold text-gray-900 dark:text-white">
             <span>Total Price</span>
-            <span>₹{totalPrice}</span>
+            <span>₹{totalPrice.toFixed(2)}</span>
           </div>
 
           <button className="w-full mt-4 bg-green-600 text-white py-2 rounded-lg">

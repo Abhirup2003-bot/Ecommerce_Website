@@ -34,7 +34,7 @@ const Home = () => {
 
       {/* TOP RATED */}
       <div className="text-2xl text-center my-6 font-bold">
-        Our Highest Rated Products
+        Our Top Rated Products
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4 px-4">
@@ -57,12 +57,12 @@ const Home = () => {
       </div>
 
       {/* SMARTPHONES */}
-      <div className="text-2xl text-center my-6 font-bold">Our Smartphones</div>
+      <div className="text-2xl text-center my-6 font-bold">Our Furnitures</div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4 px-4">
         {products &&
           products
-            .filter((item) => item.category === "smartphones")
+            .filter((item) => item.category === "furniture")
             .slice(0, 4)
             .map((item) => (
               <Link to={`/productdetails/${item.id}`} key={item.id}>
